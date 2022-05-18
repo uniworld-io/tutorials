@@ -47,7 +47,7 @@ import { TransactionDetailModal } from '../../components/TransactionDetailModal'
 import { EmptyView } from '../../components/EmptyView';
 import { AppButton } from '../../components/AppButton';
 import { useDebounce } from '../../hook/useDebounce';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, NETWORK_CONFIG } from '../../config/customize';
 
 let interval;
 
@@ -119,7 +119,7 @@ const Wallet = (props) => {
     }, 30000);
 
     // socket
-    const socket = io('https://uniscan.world', {
+    const socket = io(NETWORK_CONFIG.UNI_SCAN_URL, {
       reconnection: true,
       reconnectionDelay: 5000,
       jsonp: false,

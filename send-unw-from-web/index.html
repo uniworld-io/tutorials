@@ -23,6 +23,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@uniworld/unichain-js@1.0.8/dist/UnichainJS.js"></script>
     <script>
+        function setupUichainJS () {
+            const fullNode = 'https://testnet-seed-1.unichain.world'
+            const relayNode = 'https://testnet-relay-1.unichain.world'
+            return new UnichainJS({fullNode, relayNode})
+        }
+
         function getRandomKey () {
             const chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'f']
             const len = chars.length
@@ -35,7 +41,7 @@
             return key
         }
         function generateRandomWallet() {
-            const unichainJs = new UnichainJS({fullNode: 'https://test-seed.unichain.world', relayNode: 'https://test-relay-node.unichain.world'})
+            const unichainJs = setupUichainJS()
             const privateKey = getRandomKey()
             const address = unichainJs.address.fromPrivateKey(privateKey)
             document.getElementById("privateKey").value = privateKey
@@ -43,7 +49,7 @@
         }
        
         async function sendUNW() {
-            const unichainJs = new UnichainJS({fullNode: 'https://test-seed.unichain.world', relayNode: 'https://test-relay-node.unichain.world'})
+            const unichainJs = setupUichainJS()
             try {
                 //Get input from UI: to address, amount, private key, from address
                 const toAddress = document.getElementById('toAddress').value

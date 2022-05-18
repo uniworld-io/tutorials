@@ -10,8 +10,9 @@ const images = {
   // v2
   homebg: require('../assets/homebg.png'),
   unwcash: require('../assets/unwcash.png'),
-  unwCashGr: require('../assets/unw-cash-gr.png'),
+  unwCashGr: require('../assets/native-token.png'),
   uniToken: require('../assets/uniToken.png'),
+  nativeToken: require('../assets/native-token.png'),
   bracket: require('../assets/bracket.png'),
   empty: require('../assets/empty.png'),
   send1: require('../assets/send.png'),

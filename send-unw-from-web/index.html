@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tutorial - Send UNW from web app</title>
+</head>
+
+<body style="font-size: 18px; margin-left: 25%; margin-top: 50px; width: 50%;">
+    <p><b>Generate Random Wallet</b></p>
+    <input id="privateKey" type="text" placeholder="Private Key" style="width: 90%; margin-bottom: 10px" />
+    <input id="address" type="text" placeholder="Private Key" style="width: 90%; margin-bottom: 10px" />
+    <button onclick="generateRandomWallet()">Generate Random Wallet</button>
+    <p><i>*Please write down your private key and address for later uses</i></p>
+
+    <hr>
+    <p><b>Send UNW to another address</b></p>
+    <input type="text" id="toAddress" placeholder="To address" style="width: 90%;"/>
+    <input type="text" id="amount" placeholder="UNW amount" style="width: 90%; margin-top: 10px;margin-bottom: 5px;"/>
+    <p><button onclick="sendUNW()">Send UNW</button></p>
+    <p id="result">Result: </p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@uniworld/unichain-js@1.0.8/dist/UnichainJS.js"></script>
+    <script>
+        function getRandomKey () {
+            const chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'f']
+            const len = chars.length
+            let key = ''
+            for (let i = 0; i < 64; ++i) {
+                const random = Math.floor(Math.random() * (len - 0))
+                const char = chars[random]
+                key += char
+            }
+            return key
+        }
+        function generateRandomWallet() {
+            const unichainJs = new UnichainJS({fullNode: 'https://test-seed.unichain.world', relayNode: 'https://test-relay-node.unichain.world'})
+            const privateKey = getRandomKey()
+            const address = unichainJs.address.fromPrivateKey(privateKey)
+            document.getElementById("privateKey").value = privateKey
+            document.getElementById("address").value = address
+        }
+       
+        async function sendUNW() {
+            const unichainJs = new UnichainJS({fullNode: 'https://test-seed.unichain.world', relayNode: 'https://test-relay-node.unichain.world'})
+            try {
+                //Get input from UI: to address, amount, private key, from address
+                const toAddress = document.getElementById('toAddress').value
+                let amount = document.getElementById('amount').value 
+                const privateKey = document.getElementById("privateKey").value
+                const fromAddress = document.getElementById("address").value
+
+                //convert amount to Ginza. 1 UNW = 10^6 Ginza
+                amount = unichainJs.toGinza(parseFloat(amount))
+
+                //create unsigned transaction
+                const unsignedTx = await unichainJs.transactionBuilder.sendUnw(toAddress, amount, 0, fromAddress)
+                
+                //signed transaction by private key
+                const signedTx = await unichainJs.api.sign(unsignedTx, privateKey)
+
+                //broadcast signed transaction into network
+                const broastTx = await unichainJs.api.sendRawTransaction(signedTx)
+                document.getElementById("result").innerHTML = 'Send success, data = ' + JSON.stringify(broastTx)
+
+            } catch (err) {
+                document.getElementById("result").innerHTML = 'Error ' + err
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,12 +1,10 @@
 /* eslint-disable no-throw-literal */
 import Unichain from '@uniworld/unichain-js';
-
-export const UNICHAIN_NETWORK = 'https://test-seed.unichain.world';
-export const RELAY_NETWORK = 'https://test-seed-relay.unichain.world';
+import { NETWORK_CONFIG } from '../../config/customize';
 
 const unichain = new Unichain({
-  fullHost: UNICHAIN_NETWORK,
-  solidityNode: RELAY_NETWORK,
+  fullHost: NETWORK_CONFIG.UNICHAIN_NETWORK,
+  solidityNode: NETWORK_CONFIG.RELAY_NETWORK,
 });
 
 export const request = async (endpoint, method, data) => {

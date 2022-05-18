@@ -22,7 +22,6 @@ export const checkImportantWallet = val => {
 };
 
 export const EXPLORE_URL = 'https://uniscan.world/transaction/';
-// export const EXPLORE_URL = 'https://testnet.unichain.world/transaction/';
 
 export const MESSAGES = {
   WRONG_PWD: 'Password is incorrect',

@@ -16,7 +16,7 @@ import { get } from 'lodash';
 import { decrypt } from '../../utils/encrypt';
 import { RegularText } from '../CustomFontText/RegularText';
 import useCopyToClipboard from '../../hook/useCopied';
-import { CUSTOMIZE } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 export const ExportPrivateKeyModal = ({
     visible,
@@ -85,7 +85,7 @@ export const ExportPrivateKeyModal = ({
                 {!privateKey ?
                     <View>
                         <Text style={styles.txt}>
-                            Type your UniWallet password
+                            Type your {CONSTANTS.CURRENCY} wallet password
                         </Text>
                         <TextInput
                             style={styles.input}

@@ -146,8 +146,8 @@ android {
             incremental true
         }
         multiDexEnabled true
-        versionCode 66
-        versionName "3.3.1"
+        versionCode 1
+        versionName "1.0.0"
     }
     signingConfigs {
         release {

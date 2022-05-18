@@ -1,17 +1,13 @@
+import { NETWORK_CONFIG } from "./customize";
+
 /* App config for apis
  */
 const ApiConfig = {
-  /* Mainnet */
-  BASE_EXPLORER_URL: 'https://uniscan.world/api',
-  UNI_SCAN_URL: 'https://uniscan.world',
-  BASE_URL: 'https://node.unichain.world',
-  RELAY_NODE: 'https://relay-node-1.unichain.world',
 
-  /* Testnet */
-  // BASE_EXPLORER_URL: 'https://testnet.unichain.world/api',
-  // UNI_SCAN_URL: 'https://testnet.unichain.world',
-  // BASE_URL: 'https://test-seed.unichain.world',
-  // RELAY_NODE: 'https://test-seed-relay.unichain.world',
+  BASE_EXPLORER_URL: NETWORK_CONFIG.BASE_EXPLORER_URL,
+  UNI_SCAN_URL: NETWORK_CONFIG.UNI_SCAN_URL,
+  BASE_URL: NETWORK_CONFIG.BASE_URL,
+  RELAY_NODE: NETWORK_CONFIG.RELAY_NODE,
 
   LOGIN: '/api/login',
   VALIDATE_LOGIN: '/validate/validate_login_mobile',

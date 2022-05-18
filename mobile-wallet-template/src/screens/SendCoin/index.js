@@ -270,7 +270,7 @@ const SendCoin = props => {
             <Image
               source={
                 selectedCurrency.key === CONSTANTS.CURRENCY
-                  ? images.uniToken
+                  ? CUSTOMIZE.nativeToken
                   : images.unwCashGr
               }
               style={{ width: 30, height: 30, borderRadius: 6 }}

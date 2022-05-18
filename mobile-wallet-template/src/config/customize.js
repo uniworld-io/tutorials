@@ -19,5 +19,6 @@ export const NETWORK_CONFIG = {
 
 export const CUSTOMIZE = {
     primary_color: COLORS.black,
-    logo: images.banner
+    logo: images.banner,
+    nativeToken: images.nativeToken
 };

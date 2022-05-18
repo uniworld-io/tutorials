@@ -11,7 +11,7 @@ import { SemiBoldText } from '../../../components/CustomFontText/SemiBoldText';
 import { helpers } from '../../../utils/helpers';
 import { get } from 'lodash';
 import { useSelector } from 'react-redux';
-import { CONSTANTS } from '../../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
 
 export const TokenSelectionModal = ({
     visible,
@@ -100,7 +100,7 @@ const AssetItem = ({
             onPress={onPress}
             style={styles.currencyContainer}>
             <Image
-                source={get(data, 'key', '') === CONSTANTS.CURRENCY ? images.uniToken : images.unwCashGr}
+                source={get(data, 'key', '') === CONSTANTS.CURRENCY ? CUSTOMIZE.nativeToken : images.unwCashGr}
                 style={{ width: 28, height: 28, borderRadius: 6 }}
             />
             <View

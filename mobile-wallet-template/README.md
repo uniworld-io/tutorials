@@ -39,7 +39,7 @@ To build application for releasing (production mode)
 
 ### Android
 
-1. Follow this [instruction](https://reactnative.dev/docs/signed-apk-android) first
+Follow this [instruction](https://reactnative.dev/docs/signed-apk-android) first
 ```
 1. $ cd android
 2. $ ./gradlew assembleRelease (.apk file ) or ./gradlew bundleRelease (.aab file)

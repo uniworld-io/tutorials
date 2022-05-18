@@ -7,7 +7,7 @@ import {
     View,
     Image
 } from 'react-native';
-import images from '../../../config/images';
+import { CUSTOMIZE } from '../../../config/customize';
 import { blackColor, whiteColor } from '../../../utils/colorHelper';
 import { helpers } from '../../../utils/helpers';
 
@@ -18,7 +18,7 @@ export const TokenItem = ({
 }) => {
     return (
         <View style={[styles.container, border && { borderBottomWidth: 0.5, borderBottomColor: blackColor(.1) }]}>
-            <Image source={images.uniToken} style={styles.img} />
+            <Image source={CUSTOMIZE.nativeToken} style={styles.img} />
             <View style={styles.content}>
                 <Text style={styles.label}>{future ? get(data, 'value.token_name', '') : get(data, 'key', '')}</Text>
                 <Text style={styles.amount}>{helpers.formatAmount(future ? get(data, 'value.total_value', '') : get(data, 'value', ''))}</Text>

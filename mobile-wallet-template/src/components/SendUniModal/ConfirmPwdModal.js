@@ -24,7 +24,7 @@ import { checkImportantWallet, Constants } from '../../config/constants';
 import { walletUtils } from '../../utils/walletHelpers';
 import { Icon } from 'native-base';
 import { helpers } from '../../utils/helpers';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 export const ConfirmUniModal = ({
   label = 'Enter your password to complete transaction',
@@ -169,7 +169,7 @@ export const ConfirmUniModal = ({
                   fontSize: 18,
                   fontWeight: 'bold',
                 }}>
-                {!sent ? `Send ${CONSTANTS.CURRENCY}` : 'Successfully!'}
+                {!sent ? `Send ${CUSTOMIZE.token_name}` : 'Successfully!'}
               </Text>
               {!sent ? (
                 <Pressable
@@ -214,7 +214,7 @@ export const ConfirmUniModal = ({
             ) : (
                 <View>
                   <Text style={styles.successLabel}>
-                    Send {(transactionInfo.amount * 1.0) / Math.pow(10, 6)} {CONSTANTS.CURRENCY} to
+                    Send {(transactionInfo.amount * 1.0) / Math.pow(10, 6)} {CUSTOMIZE.token_name} to
               {' address'}
                     {`"${transactionInfo.to_address}"`} successfully!
             </Text>

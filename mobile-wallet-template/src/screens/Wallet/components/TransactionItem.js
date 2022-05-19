@@ -12,9 +12,10 @@ import images from '../../../config/images';
 import { blackColor, COLORS } from '../../../utils/colorHelper';
 import { helpers } from '../../../utils/helpers';
 import { CONTRACT_TYPE_MAPPING } from '../../../config/constants';
-import { CONSTANTS } from '../../../config/customize';
+import { CUSTOMIZE } from '../../../config/customize';
 
 export const TransactionItem = ({ owner = '', item, setTxVisible = () => { } }) => {
+
   return (
     <Pressable
       onPress={() =>
@@ -75,7 +76,7 @@ export const TransactionItem = ({ owner = '', item, setTxVisible = () => { } }) 
                 :
                 ''
             }
-            {item?.token === CONSTANTS.CURRENCY ?
+            {item?.token === 'UNW' ?
               helpers.formatCurrency(helpers.formatNumber(get(item, 'amount', 0)))
               :
               helpers.formatCurrency(get(item, 'amount', 0))
@@ -90,7 +91,7 @@ export const TransactionItem = ({ owner = '', item, setTxVisible = () => { } }) 
               get(item, 'token', '') ?
                 get(item, 'token', '')
                 :
-                get(item, 'token', CONSTANTS.CURRENCY)}
+                get(item, 'token', CUSTOMIZE.token_name)}
           </BoldText>
         </View>
         <RegularText

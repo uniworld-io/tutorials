@@ -119,11 +119,11 @@ export const TransactionDetailModal = ({
                                             :
                                             ''
                                     }
-                                    {visible?.token === CONSTANTS.CURRENCY ?
+                                    {visible?.token === CUSTOMIZE.token_name ?
                                         helpers.formatCurrency(helpers.formatNumber(get(visible, 'amount', 0)))
                                         :
                                         helpers.formatCurrency(get(visible, 'amount', 0))
-                                    } {get(visible, 'token', CONSTANTS.CURRENCY)}
+                                    } {get(visible, 'token', CUSTOMIZE.token_name)}
                                 </RegularText>
                             </View>
                             <View style={{ flex: 1 }}>

@@ -60,22 +60,6 @@ export const ActionPanel = ({
           <RegularText style={styles.txtBtn}>Receive</RegularText>
         </Pressable>
       </View>
-      {get(walletResource, 'token', []).length > 0 &&
-        <View
-          style={styles.tokenWrapper}>
-          <View style={{ flex: 1 }}>
-            <RegularText style={{ fontSize: 13, marginBottom: 6 }}>Tokens</RegularText>
-            {get(walletResource, 'token', []).map((item, idx) => {
-              return <TokenItem
-                key={idx + 'token'}
-                data={item}
-                border={idx !== walletResource?.token.length - 1}
-              />
-            })}
-          </View>
-
-        </View>
-      }
       {get(walletResource, 'token_future', []).length > 0 &&
         <View
           style={styles.tokenWrapper}>
@@ -112,7 +96,7 @@ export const ActionPanel = ({
             {get(walletResource, 'reward', 0)
               ? helpers.formatAmount(helpers.formatUnw(get(walletResource, 'reward', 0)), 6)
               : 0}{' '}
-            {CONSTANTS.CURRENCY}
+            {CUSTOMIZE.token_name}
           </BoldText>
         </View>
         <Pressable

@@ -12,6 +12,7 @@ const images = {
   unwcash: require('../assets/unwcash.png'),
   unwCashGr: require('../assets/native-token.png'),
   uniToken: require('../assets/uniToken.png'),
+  otherToken: require('../assets/unw-cash-gr.png'),
   nativeToken: require('../assets/native-token.png'),
   bracket: require('../assets/bracket.png'),
   empty: require('../assets/empty.png'),
@@ -22,6 +23,7 @@ const images = {
 
   // v3
   banner: require('../assets/banner.png'),
+  token_icon: require('../assets/token_icon.png'),
 
   // tab
   tab1: require('../assets/tab/tab1.png'),

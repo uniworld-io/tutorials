@@ -19,7 +19,6 @@ import {Icon} from 'native-base';
 import {helpers} from '../../utils/helpers';
 import {get} from 'lodash';
 import {useDispatch, useSelector} from 'react-redux';
-import {PWD_MODAL_LOADING_DISABLE} from '../../redux/actions/types';
 import { CUSTOMIZE } from '../../config/customize';
 
 export const ConfirmPwdModal = ({

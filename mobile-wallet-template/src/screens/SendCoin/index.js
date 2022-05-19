@@ -65,7 +65,7 @@ const SendCoin = props => {
   const { txVisible } = useSelector(state => state.modalReducer);
 
   const [selectedCurrency, setSelectedCurrency] = useState({
-    key: CONSTANTS.CURRENCY,
+    key: CUSTOMIZE.token_name,
     value: get(walletResource, 'balance', 0),
   });
   const [amount, setAmount] = useState('');
@@ -102,7 +102,7 @@ const SendCoin = props => {
 
   useEffect(() => {
     const tempData = [
-      { key: CONSTANTS.CURRENCY, value: get(walletResource, 'balance', 0) },
+      { key: 'unw', value: get(walletResource, 'balance', 0) },
       ...get(walletResource, 'token', []),
     ];
     const currentSelected = find(tempData, item => {
@@ -115,7 +115,7 @@ const SendCoin = props => {
     if (isNaN(amount) || amount <= 0 || receiver.trim().length == 0) {
       setDisabled(true);
     } else {
-      if (selectedCurrency.key === CONSTANTS.CURRENCY) {
+      if (selectedCurrency.key === CUSTOMIZE.token_name) {
         if (amount > helpers.formatNumber(get(walletResource, 'balance', 0))) {
           setDisabled(true);
         } else {
@@ -176,7 +176,7 @@ const SendCoin = props => {
       setCount(true);
       if (privateKey) {
         if (future) {
-          if (selectedCurrency.key === CONSTANTS.CURRENCY) {
+          if (selectedCurrency.key === CUSTOMIZE.token_name) {
             dispatch(
               actSendNativeUNWFuture({
                 owner_address: unwAddress,
@@ -199,7 +199,7 @@ const SendCoin = props => {
             );
           }
         } else {
-          if (selectedCurrency.key === CONSTANTS.CURRENCY) {
+          if (selectedCurrency.key === CUSTOMIZE.token_name) {
             dispatch(
               actSendNativeUNW({
                 from_address: unwAddress,
@@ -243,7 +243,7 @@ const SendCoin = props => {
   }
 
   const handleSetMax = () => {
-    if (selectedCurrency.key === CONSTANTS.CURRENCY) {
+    if (selectedCurrency.key === CUSTOMIZE.token_name) {
       setAmount(
         helpers.formatNumber(get(selectedCurrency, 'value', 0)).toString(),
       );
@@ -269,8 +269,8 @@ const SendCoin = props => {
             style={styles.currencyContainer}>
             <Image
               source={
-                selectedCurrency.key === CONSTANTS.CURRENCY
-                  ? CUSTOMIZE.nativeToken
+                selectedCurrency.key === CUSTOMIZE.token_name
+                  ? CUSTOMIZE.token_icon
                   : images.unwCashGr
               }
               style={{ width: 30, height: 30, borderRadius: 6 }}
@@ -286,7 +286,7 @@ const SendCoin = props => {
                   marginLeft: 10,
                 }}>
                 <SemiBoldText style={{ marginHorizontal: 4, fontSize: 18 }}>
-                  {selectedCurrency.key === CONSTANTS.CURRENCY
+                  {selectedCurrency.key === CUSTOMIZE.token_name
                     ? helpers.formatAmount(
                       helpers.formatNumber(get(selectedCurrency, 'value', 0)),
                       6,
@@ -378,7 +378,7 @@ const SendCoin = props => {
             <Text style={{ color: '#9D9E9F' }}>Transaction Fee: </Text>
             <Text style={{ fontWeight: '500' }}>
               {' '}
-              {selectedCurrency.key === CONSTANTS.CURRENCY ? '0,000267' : fee}{' '}
+              {selectedCurrency.key === CUSTOMIZE.token_name ? '0,000267' : fee}{' '}
               {selectedCurrency.key}
             </Text>
           </ThinText>

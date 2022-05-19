@@ -27,7 +27,7 @@ export const TokenSelectionModal = ({
 
     useEffect(() => {
         const tempData = [
-            { key: CONSTANTS.CURRENCY, value: get(walletResource, 'balance', 0) },
+            { key: 'unw', value: get(walletResource, 'balance', 0) },
             ...get(walletResource, 'token', [])
         ];
         setListAsset(tempData);
@@ -100,7 +100,7 @@ const AssetItem = ({
             onPress={onPress}
             style={styles.currencyContainer}>
             <Image
-                source={get(data, 'key', '') === CONSTANTS.CURRENCY ? CUSTOMIZE.nativeToken : images.unwCashGr}
+                source={get(data, 'key', '') === CUSTOMIZE.token_name ? CUSTOMIZE.token_icon : images.otherToken}
                 style={{ width: 28, height: 28, borderRadius: 6 }}
             />
             <View
@@ -114,7 +114,7 @@ const AssetItem = ({
                 <BoldText style={{ fontSize: 14 }}>{get(data, 'key', '')}</BoldText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
                     <SemiBoldText style={{ marginHorizontal: 4, fontSize: 16 }}>
-                        {data?.key === CONSTANTS.CURRENCY ? helpers.formatAmount(helpers.formatUnw(get(data, 'value', 0)), 6) : data?.value}
+                        {data?.key === 'UNW' ? helpers.formatAmount(helpers.formatUnw(get(data, 'value', 0)), 6) : data?.value}
                     </SemiBoldText>
                 </View>
             </View>

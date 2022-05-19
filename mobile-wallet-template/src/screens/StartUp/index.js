@@ -11,7 +11,7 @@ import * as loginActions from '../../redux/actions/loginActions';
 import styles from './styles';
 import images from '../../config/images';
 import { blackColor } from '../../utils/colorHelper';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 const StartUp = () => {
   const { colors } = useTheme();
@@ -46,7 +46,7 @@ const StartUp = () => {
       <Animatable.Text
         animation="fadeIn"
         style={{ fontSize: 16, fontWeight: '600', marginTop: 20 }}>
-        {CONSTANTS.CURRENCY} WALLET
+        {CUSTOMIZE.token_name} WALLET
       </Animatable.Text>
       <ActivityIndicator
         style={{ marginTop: 20 }}

@@ -1,14 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import { CUSTOMIZE } from '../../config/customize';
-import images from '../../config/images';
 import metrics from '../../config/metrics';
 import {helpers} from '../../utils/helpers';
 
 export const WalletImage = ({style}) => {
   return (
     <View style={[styles.container, style]}>
-      <Image source={CUSTOMIZE.logo} style={styles.image} />
+      <Image source={CUSTOMIZE.banner} style={styles.image} />
     </View>
   );
 };

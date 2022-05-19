@@ -81,7 +81,7 @@ export const WalletCard = ({
               style={{ color: COLORS.white, fontSize: helpers.isIpX ? 30 : 26 }}>
               {helpers.formatAmount(helpers.formatUnw(balance + locked + future), 3)} {''}
             </BoldText>
-            <SemiBoldText style={{ color: COLORS.white }}>{CONSTANTS.CURRENCY}</SemiBoldText>
+            <SemiBoldText style={{ color: COLORS.white }}>{CUSTOMIZE.token_name}</SemiBoldText>
           </Text>
           <RegularText
             style={{ color: COLORS.white, fontSize: 13, marginTop: 5 }}>
@@ -101,7 +101,7 @@ export const WalletCard = ({
             style={styles.figure}
             numberOfLines={1}
           >
-            {helpers.formatAmount(helpers.formatUnw(balance), 3)} {CONSTANTS.CURRENCY}
+            {helpers.formatAmount(helpers.formatUnw(balance), 3)} {CUSTOMIZE.token_name}
           </BoldText>
         </View>
         {/* center */}
@@ -116,7 +116,7 @@ export const WalletCard = ({
                 style={styles.figure}
                 numberOfLines={1}
               >
-                {helpers.formatAmount(helpers.formatUnw(future), 3)} {CONSTANTS.CURRENCY}
+                {helpers.formatAmount(helpers.formatUnw(future), 3)} {CUSTOMIZE.token_name}
               </BoldText>
             </View>
             <View style={{ flex: 1, marginHorizontal: 5 }}>
@@ -128,7 +128,7 @@ export const WalletCard = ({
                 style={styles.figure}
                 numberOfLines={1}
               >
-                {helpers.formatAmount(helpers.formatUnw(locked), 3)} {CONSTANTS.CURRENCY}
+                {helpers.formatAmount(helpers.formatUnw(locked), 3)} {CUSTOMIZE.token_name}
               </BoldText>
             </View>
           </View>

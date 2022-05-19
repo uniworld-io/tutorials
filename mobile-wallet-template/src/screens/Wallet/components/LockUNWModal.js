@@ -65,7 +65,7 @@ export const LockUNWModal = ({
             alertRef.current.alertWithType(
               'success',
               'Success',
-              `Lock ${amount} ${CONSTANTS.CURRENCY} successfully`,
+              `Lock ${amount} ${CUSTOMIZE.token_name} successfully`,
             );
           }
         }, 401);
@@ -114,7 +114,7 @@ export const LockUNWModal = ({
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 22, fontWeight: '700'}}>Lock {CONSTANTS.CURRENCY} coin</Text>
+          <Text style={{fontSize: 22, fontWeight: '700'}}>Lock {CUSTOMIZE.token_name} coin</Text>
           <Pressable onPress={() => setVisible(false)}>
             <Icon name="close" style={{fontSize: 28, color: blackColor(0.6)}} />
           </Pressable>
@@ -135,7 +135,7 @@ export const LockUNWModal = ({
                 setAmount(txt.replace(',', '.'));
               }}
               keyboardType="decimal-pad"
-              placeholder={`Enter ${CONSTANTS.CURRENCY} amount to lock`}
+              placeholder={`Enter ${CUSTOMIZE.token_name} amount to lock`}
               style={{
                 color: 'black',
                 marginTop: 20,
@@ -167,7 +167,7 @@ export const LockUNWModal = ({
                 textAlign: 'center',
                 fontSize: 16,
               }}>
-              {amount} {CONSTANTS.CURRENCY} will be locked in 3 days!
+              {amount} {CUSTOMIZE.token_name} will be locked in 3 days!
             </Text>
             <Text
               style={{

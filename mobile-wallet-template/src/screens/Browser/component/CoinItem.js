@@ -6,12 +6,12 @@ import {BoldText} from '../../../components/CustomFontText/BoldText';
 import {helpers} from '../../../utils/helpers';
 import {Icon} from 'native-base';
 import {get} from 'lodash';
-import { CONSTANTS } from '../../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
 
 export const CoinItem = ({
   walletResource,
   showBalance = true,
-  coin = CONSTANTS.CURRENCY,
+  coin = CUSTOMIZE.token_name,
   logo = images.banner,
 }) => {
   return (

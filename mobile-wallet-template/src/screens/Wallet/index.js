@@ -1,16 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
-  ScrollView,
-  AppState,
-  StyleSheet,
   FlatList,
   SafeAreaView,
-  Image,
-  RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import { get, isEmpty } from 'lodash';
 import DropdownAlert from 'react-native-dropdownalert';
 import io from 'socket.io-client';
@@ -19,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { WalletCard } from './components/WalletCard';
 import { blackColor, COLORS } from '../../utils/colorHelper';
 import { TransactionItem } from './components/TransactionItem';
-import images from '../../config/images';
 import { helpers } from '../../utils/helpers';
 import {
   getAccountResource,
@@ -91,10 +84,7 @@ const Wallet = (props) => {
   const getAccRes = async () => {
     if (unwAddress) {
       const resResource = await getAccountResource(unwAddress);
-      // const resResource = await getAccountResource('UUgeWhBJeNZBqWcJyXh8bRjYhT5ZNZNxka');
       const resReward = await getReward(unwAddress);
-      // console.log('----unw resource---', resResource);
-      // console.log('----unw reward---', resReward);
       dispatch(getWalletResource(resResource));
       if (resReward.status) {
         dispatch(getWalletReward(resReward.data));
@@ -103,8 +93,6 @@ const Wallet = (props) => {
   };
 
   useEffect(() => {
-    // AppState.addEventListener('change', handleChangeAppState);
-
     async function getUnwWalletBalance() {
       await setLoading(true);
       getAccRes();
@@ -149,8 +137,6 @@ const Wallet = (props) => {
     try {
       setTxLoading(true);
       const result = await getAllTransactions(unwAddress);
-      // const result = await getAllTransactions('UaUAzoddeV5tqN57YujFbKjSroA994nrAQ');
-      // console.log('asasasa', result.data);
       if (get(result, 'data', null)) {
         setTransactionHistory(result.data);
       }
@@ -159,16 +145,6 @@ const Wallet = (props) => {
       setTxLoading(false);
     }
   };
-
-  // language
-  // const [t, i18n] = useTranslation();
-  // const changeLanguage = () => {
-  //   if (i18n.language === 'fr') {
-  //     i18n.changeLanguage('en');
-  //   } else {
-  //     i18n.changeLanguage('fr');
-  //   }
-  // };
 
   const onRefresh = async () => {
     await setRefreshing(true);
@@ -219,7 +195,7 @@ const Wallet = (props) => {
                 'Success',
                 `Get ${Number(
                   get(walletResource, 'reward', 0),
-                )} ${CONSTANTS.CURRENCY} reward success!`,
+                )} ${CUSTOMIZE.token_name} reward success!`,
               );
             }
           }, 401);

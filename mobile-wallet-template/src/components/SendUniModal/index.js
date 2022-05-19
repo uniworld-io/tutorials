@@ -12,7 +12,7 @@ import {useInput} from '../TextInput';
 import {helpers} from '../../utils/helpers';
 import {isUnwAddress} from '../../redux/services/unw';
 import {Icon} from 'native-base';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 export const SendUniModal = ({
   visible,
@@ -74,7 +74,7 @@ export const SendUniModal = ({
       return;
     } else if (Number(amount) > helpers.formatNumber(walletBalance)) {
       if (walletBalance == 0) {
-        await setError(`You don't have any ${CONSTANTS.CURRENCY}`);
+        await setError(`You don't have any ${CUSTOMIZE.token_name}`);
       } else {
         await setError(
           `You need input a number <= ${helpers.formatNumber(walletBalance)}`,
@@ -133,7 +133,7 @@ export const SendUniModal = ({
               fontSize: 18,
               fontWeight: 'bold',
             }}>
-            Send {CONSTANTS.CURRENCY}
+            Send {CUSTOMIZE.token_name}
           </Text>
           <Pressable
             onPress={() => {

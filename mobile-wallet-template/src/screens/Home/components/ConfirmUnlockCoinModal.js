@@ -62,7 +62,7 @@ export const ConfirmUnlockCoinModal = ({
             alertRef.current.alertWithType(
               'success',
               'Success',
-              `Unlock ${CONSTANTS.CURRENCY} successfully`,
+              `Unlock ${CUSTOMIZE.token_name} successfully`,
             );
           }
         }, 401);
@@ -113,7 +113,7 @@ export const ConfirmUnlockCoinModal = ({
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 22, fontWeight: '700'}}>Unlock {CONSTANTS.CURRENCY} coin</Text>
+          <Text style={{fontSize: 22, fontWeight: '700'}}>Unlock {CUSTOMIZE.token_name} coin</Text>
           <Pressable onPress={() => setVisible(false)}>
             <Icon name="close" style={{fontSize: 28, color: blackColor(0.6)}} />
           </Pressable>
@@ -123,7 +123,7 @@ export const ConfirmUnlockCoinModal = ({
             <Text style={{fontSize: 16, fontWeight: '700'}}>
               {helpers.formatNumber(lock)}
             </Text>{' '}
-            {CONSTANTS.CURRENCY} will be unlocked
+            {CUSTOMIZE.token_name} will be unlocked
           </Text>
         )}
         {step == 1 && (

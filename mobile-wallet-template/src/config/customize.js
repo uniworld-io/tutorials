@@ -2,7 +2,6 @@ import { COLORS } from "../utils/colorHelper";
 import images from "./images";
 
 export const CONSTANTS = {
-    TITLE: 'Wallet Template',
     CURRENCY: 'TEMPLATE'
 };
 
@@ -19,6 +18,8 @@ export const NETWORK_CONFIG = {
 
 export const CUSTOMIZE = {
     primary_color: COLORS.black,
-    logo: images.banner,
-    nativeToken: images.nativeToken
+    banner: images.banner,
+    token_icon: images.token_icon,
+    banner_title: 'Wallet Template',
+    token_name: 'MYTOKEN',
 };

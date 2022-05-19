@@ -15,12 +15,12 @@ export const WalletHeader = ({ }) => {
     <View
       style={styles.container}>
       <Image
-        source={CUSTOMIZE.logo}
+        source={CUSTOMIZE.banner}
         style={styles.img}
       />
       <View style={styles.titleWrapper}>
         <BoldText numberOfLines={1} style={styles.title}>
-          {CONSTANTS.TITLE}
+          {CUSTOMIZE.banner_title}
         </BoldText>
       </View>
       <View style={styles.leftWrapper}>

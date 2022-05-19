@@ -6,12 +6,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
-  Image,
 } from 'react-native';
-import { CONSTANTS } from '../../../config/customize';
-import images from '../../../config/images';
-import metrics from '../../../config/metrics';
+import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
 import {blackColor, whiteColor} from '../../../utils/colorHelper';
 import {helpers} from '../../../utils/helpers';
 
@@ -102,7 +98,7 @@ export const TransactionItem = ({index = 0, item, style = {}, unwAddress}) => {
             fontSize: 16,
             color: 'black',
           }}>
-          {get(item, 'token', CONSTANTS.CURRENCY)}
+          {get(item, 'token', CUSTOMIZE.token_name)}
         </Text>
       </View>
     </Pressable>

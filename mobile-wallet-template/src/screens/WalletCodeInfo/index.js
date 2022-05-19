@@ -87,7 +87,7 @@ const WalletCodeInfo = (props) => {
               onPress={() => {
                 Share.open({
                   title: 'My Uni Wallet address',
-                  subject: `Let share your ${CONSTANTS.CURRENCY} with me`,
+                  subject: `Let share your ${CUSTOMIZE.token_name} with me`,
                   message: unwAddress,
                 })
                   .then((res) => {

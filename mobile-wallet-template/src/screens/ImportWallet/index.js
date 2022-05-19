@@ -14,7 +14,7 @@ import { walletUtils } from '../../utils/walletHelpers';
 import { helpers, SCREEN_WIDTH } from '../../utils/helpers';
 import { Loading } from '../../components/Loading';
 import { fetchWalletInfo } from '../../redux/actions/walletAction';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 const ImportWallet = (props) => {
   const { navigation } = props;
@@ -128,7 +128,7 @@ const ImportWallet = (props) => {
           }}>
           <Text style={styles.title}>Import existing wallet</Text>
           <Text style={[styles.subtitle, { color: colors.grey }]}>
-            Enter your private key or mnemonic of your {CONSTANTS.CURRENCY}'s wallet
+            Enter your private key or mnemonic of your {CUSTOMIZE.token_name}'s wallet
           </Text>
           <View
             style={{

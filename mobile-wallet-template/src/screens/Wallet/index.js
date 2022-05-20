@@ -230,7 +230,7 @@ const Wallet = (props) => {
               flex: 1,
               marginBottom: 15,
             }}
-            data={transactionHistory ? transactionHistory.slice(0, 100) : []}
+            data={transactionHistory ? transactionHistory.filter(item => item.token === CUSTOMIZE.token_name).slice(0, 100) : []}
             initialNumToRender={10}
             onRefresh={onRefresh}
             refreshing={refreshing}
@@ -240,11 +240,6 @@ const Wallet = (props) => {
                   unwAddress={unwAddress}
                   resource={find(walletResource?.token, asset => asset.key === CUSTOMIZE.token_name)}
                   futureResource={find(walletResource?.token_future, asset => asset.key === CUSTOMIZE.token_name)}
-                  // balance={get(walletResource, 'token', 0)}
-                  // locked={get(walletResource, 'lock', 0)}
-                  // future={get(walletResource, 'future_supply.total_balance', 0)}
-                  // energyLocked={get(walletResource, 'energy_lock', null)}
-                  // usdtPair={usdtPair}
                 />
                 <ActionPanel
                   navigation={navigation}

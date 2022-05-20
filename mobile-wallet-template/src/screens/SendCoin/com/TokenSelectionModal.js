@@ -26,10 +26,7 @@ export const TokenSelectionModal = ({
     const [listAsset, setListAsset] = useState([]);
 
     useEffect(() => {
-        const tempData = [
-            { key: 'unw', value: get(walletResource, 'balance', 0) },
-            ...get(walletResource, 'token', [])
-        ];
+        const tempData = [...get(walletResource, 'token', [])].filter(item => item.key === CUSTOMIZE.token_name);
         setListAsset(tempData);
     }, [walletResource.token]);
 

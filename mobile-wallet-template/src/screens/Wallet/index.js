@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
-import { get, isEmpty } from 'lodash';
+import { find, get, isEmpty } from 'lodash';
 import DropdownAlert from 'react-native-dropdownalert';
 import io from 'socket.io-client';
 
@@ -40,7 +40,7 @@ import { TransactionDetailModal } from '../../components/TransactionDetailModal'
 import { EmptyView } from '../../components/EmptyView';
 import { AppButton } from '../../components/AppButton';
 import { useDebounce } from '../../hook/useDebounce';
-import { CONSTANTS, NETWORK_CONFIG } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE, NETWORK_CONFIG } from '../../config/customize';
 
 let interval;
 
@@ -238,11 +238,13 @@ const Wallet = (props) => {
               <View>
                 <WalletCard
                   unwAddress={unwAddress}
-                  balance={get(walletResource, 'balance', 0)}
-                  locked={get(walletResource, 'lock', 0)}
-                  future={get(walletResource, 'future_supply.total_balance', 0)}
-                  energyLocked={get(walletResource, 'energy_lock', null)}
-                  usdtPair={usdtPair}
+                  resource={find(walletResource?.token, asset => asset.key === CUSTOMIZE.token_name)}
+                  futureResource={find(walletResource?.token_future, asset => asset.key === CUSTOMIZE.token_name)}
+                  // balance={get(walletResource, 'token', 0)}
+                  // locked={get(walletResource, 'lock', 0)}
+                  // future={get(walletResource, 'future_supply.total_balance', 0)}
+                  // energyLocked={get(walletResource, 'energy_lock', null)}
+                  // usdtPair={usdtPair}
                 />
                 <ActionPanel
                   navigation={navigation}

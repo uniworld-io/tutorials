@@ -8,7 +8,7 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import { CONSTANTS } from '../../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
 import images from '../../../config/images';
 import {blackColor, whiteColor} from '../../../utils/colorHelper';
 import {helpers} from '../../../utils/helpers';
@@ -16,7 +16,7 @@ import {helpers} from '../../../utils/helpers';
 export const InfoCard = ({
   label = 'Available',
   figure = 0,
-  unit = CONSTANTS.CURRENCY,
+  unit = CUSTOMIZE.token_name,
   style = {},
   lock = false,
   expire_time = false,

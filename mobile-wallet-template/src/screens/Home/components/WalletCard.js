@@ -61,7 +61,7 @@ export const WalletCard = ({
             style={{flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
             <Text style={styles.content}>
               {helpers.formatNumber(balance)}
-              <Text style={{fontWeight: 'normal', fontSize: 18}}> {CONSTANTS.CURRENCY}</Text>
+              <Text style={{fontWeight: 'normal', fontSize: 18}}> {CUSTOMIZE.token_name}</Text>
             </Text>
             <Pressable
               onPress={() => setLockVisible(true)}

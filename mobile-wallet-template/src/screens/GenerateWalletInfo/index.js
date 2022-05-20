@@ -7,8 +7,6 @@ import {KeyboardAwareScrollView} from '@codler/react-native-keyboard-aware-scrol
 import {WalletImage} from '../../components/WalletImage';
 import {AppButton} from '../../components/AppButton';
 import {WalletInfo} from '../../components/WalletInfo';
-import {requestLogin} from '../../redux/actions/loginActions';
-import metrics from '../../config/metrics';
 import {walletUtils} from '../../utils/walletHelpers';
 import {Loading} from '../../components/Loading';
 import {helpers} from '../../utils/helpers';
@@ -18,7 +16,7 @@ import {
   fetchWalletInfo,
 } from '../../redux/actions/walletAction';
 import {get} from 'lodash';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 const GenerateWalletInfo = (props) => {
   const {navigation, route} = props;
@@ -105,7 +103,7 @@ const GenerateWalletInfo = (props) => {
             paddingHorizontal: 20,
             marginTop: 20,
           }}>
-          <Text style={styles.title}>Your {CONSTANTS.CURRENCY}'s wallet Info</Text>
+          <Text style={styles.title}>Your {CUSTOMIZE.token_name}'s wallet Info</Text>
           <View style={{paddingHorizontal: 15, marginTop: 7}}>
             <WalletInfo content={walletInfo.address} numberOfLines={2} />
             <WalletInfo

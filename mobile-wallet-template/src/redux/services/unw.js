@@ -265,12 +265,9 @@ export const getTokenByID = async (ID) => {
  */
 export const getAccountResource = async (address) => {
   try {
-    // const results = await unichain.unx.getAccount(address);
     const results = await apiClient.post(`/wallet/getaccount`, {
       address: unichain.address.toHex(address)
-      // address: unichain.address.toHex("UcxMtsJTHv2JYKXn3Hivd6qv81dq8L4im8")
     });
-    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', results);
     //list token 
     let listTokens = []
     if (results["asset"] && results["asset"].length > 0) {

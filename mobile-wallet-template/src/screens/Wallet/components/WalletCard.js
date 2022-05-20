@@ -7,26 +7,19 @@ import {
   StyleSheet
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import images from '../../../config/images';
-import metrics from '../../../config/metrics';
 import { COLORS } from '../../../utils/colorHelper';
 import { helpers } from '../../../utils/helpers';
 import { SemiBoldText } from '../../../components/CustomFontText/SemiBoldText';
 import { BoldText } from '../../../components/CustomFontText/BoldText';
 import { RegularText } from '../../../components/CustomFontText/RegularText';
 import { ExportPrivateKeyModal } from '../../../components/ExportPrivateKeyModal';
-import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
-
-const TEXT_LENGTH = 300;
-const TEXT_HEIGHT = 30;
-const OFFSET = TEXT_LENGTH / 2 - TEXT_HEIGHT / 2;
+import { CUSTOMIZE } from '../../../config/customize';
+import { get } from 'lodash';
 
 export const WalletCard = ({
-  balance,
-  locked,
   unwAddress,
-  usdtPair,
-  future
+  resource,
+  futureResource,
 }) => {
 
   const [visible, setVisible] = useState(false);
@@ -79,44 +72,32 @@ export const WalletCard = ({
           <Text>
             <BoldText
               style={{ color: COLORS.white, fontSize: helpers.isIpX ? 30 : 26 }}>
-              {helpers.formatAmount(helpers.formatUnw(balance + locked + future), 3)} {''}
+              {helpers.formatAmount((get(resource, 'value', 0) + get(futureResource, 'value', 0)), 3)} {' '}
             </BoldText>
-            <SemiBoldText style={{ color: COLORS.white }}>{CONSTANTS.CURRENCY}</SemiBoldText>
+            <SemiBoldText style={{ color: COLORS.white }}>{CUSTOMIZE.token_name}</SemiBoldText>
           </Text>
-          <RegularText
+          {/* <RegularText
             style={{ color: COLORS.white, fontSize: 13, marginTop: 5 }}>
             ={' '}
             {usdtPair
               ? helpers.formatAmount(helpers.formatUnw(usdtPair * balance), 3)
               : ''}{' '}
             USD
-          </RegularText>
-        </View>
-        <View style={{}}>
-          <RegularText
-            style={styles.label}>
-            Available
-          </RegularText>
-          <BoldText
-            style={styles.figure}
-            numberOfLines={1}
-          >
-            {helpers.formatAmount(helpers.formatUnw(balance), 3)} {CONSTANTS.CURRENCY}
-          </BoldText>
+          </RegularText> */}
         </View>
         {/* center */}
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'flex-start', flex: 1 }}>
             <View style={{ flex: 1 }}>
               <RegularText
                 style={styles.label}>
-                Future
+                Available
               </RegularText>
               <BoldText
                 style={styles.figure}
                 numberOfLines={1}
               >
-                {helpers.formatAmount(helpers.formatUnw(future), 3)} {CONSTANTS.CURRENCY}
+                {helpers.formatAmount(get(resource, 'value', 0), 3)} {CUSTOMIZE.token_name}
               </BoldText>
             </View>
             <View style={{ flex: 1, marginHorizontal: 5 }}>
@@ -128,7 +109,7 @@ export const WalletCard = ({
                 style={styles.figure}
                 numberOfLines={1}
               >
-                {helpers.formatAmount(helpers.formatUnw(locked), 3)} {CONSTANTS.CURRENCY}
+                {helpers.formatAmount(get(futureResource, 'value', 0), 3)} {CUSTOMIZE.token_name}
               </BoldText>
             </View>
           </View>

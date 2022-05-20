@@ -234,7 +234,7 @@ export const ConfirmPwdWithAmountModal = ({
         </View>
         <SemiBoldText style={styles.label}>
           Amount (
-          {ACTION_TOKEN_BY_NATIVE_UNW.includes(type) ? CONSTANTS.CURRENCY : tokenData?.name})
+          {ACTION_TOKEN_BY_NATIVE_UNW.includes(type) ? CUSTOMIZE.token_name : tokenData?.name})
           *
         </SemiBoldText>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -285,7 +285,7 @@ export const ConfirmPwdWithAmountModal = ({
               </View>
               <RegularText
                 style={{ fontSize: 12, marginTop: 5, alignSelf: 'flex-end' }}>
-                {frac.b} {CONSTANTS.CURRENCY} = {helpers.formatCurrency(frac.a)}{' '}
+                {frac.b} {CUSTOMIZE.token_name} = {helpers.formatCurrency(frac.a)}{' '}
                 {tokenData?.name}
               </RegularText>
             </View>

@@ -60,22 +60,6 @@ export const ActionPanel = ({
           <RegularText style={styles.txtBtn}>Receive</RegularText>
         </Pressable>
       </View>
-      {get(walletResource, 'token', []).length > 0 &&
-        <View
-          style={styles.tokenWrapper}>
-          <View style={{ flex: 1 }}>
-            <RegularText style={{ fontSize: 13, marginBottom: 6 }}>Tokens</RegularText>
-            {get(walletResource, 'token', []).map((item, idx) => {
-              return <TokenItem
-                key={idx + 'token'}
-                data={item}
-                border={idx !== walletResource?.token.length - 1}
-              />
-            })}
-          </View>
-
-        </View>
-      }
       {get(walletResource, 'token_future', []).length > 0 &&
         <View
           style={styles.tokenWrapper}>
@@ -103,32 +87,6 @@ export const ActionPanel = ({
           </View>
         </View>
       }
-
-      <View
-        style={[styles.tokenWrapper, { paddingBottom: 15 }]}>
-        <View style={{ flex: 1 }}>
-          <RegularText style={{ fontSize: 13 }}>Rewards</RegularText>
-          <BoldText style={{ fontSize: 20, marginTop: 6 }}>
-            {get(walletResource, 'reward', 0)
-              ? helpers.formatAmount(helpers.formatUnw(get(walletResource, 'reward', 0)), 6)
-              : 0}{' '}
-            {CONSTANTS.CURRENCY}
-          </BoldText>
-        </View>
-        <Pressable
-          disabled={get(walletResource, 'reward', 0) == 0}
-          onPress={() => {
-            setRewardModal(true);
-          }}
-          style={[styles.withdrawBtn, {
-            backgroundColor:
-              get(walletResource, 'reward', 0) == 0 ? '#4C4C4C' : CUSTOMIZE.primary_color,
-          }]}>
-          <SemiBoldText style={{ color: COLORS.white, fontSize: 15 }}>
-            Withdraw
-          </SemiBoldText>
-        </Pressable>
-      </View>
     </View>
   );
 };

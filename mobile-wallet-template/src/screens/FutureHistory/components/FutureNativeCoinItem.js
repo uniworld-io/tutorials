@@ -25,7 +25,7 @@ export const FutureNativeCoinItem = ({ item }) => {
                     style={{ width: 30, height: 30 }}
                 />
                 <SemiBoldText style={styles.balance}>
-                    {helpers.formatNumber(get(item, 'future_balance', 0)) + ' ' + CONSTANTS.CURRENCY}
+                    {helpers.formatNumber(get(item, 'future_balance', 0)) + ' ' + CUSTOMIZE.token_name}
                 </SemiBoldText>
             </View>
             <RegularText style={styles.time}>Expire: {new Date(item?.expire_time).toLocaleString()}</RegularText>

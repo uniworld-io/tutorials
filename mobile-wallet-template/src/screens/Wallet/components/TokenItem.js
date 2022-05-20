@@ -18,7 +18,7 @@ export const TokenItem = ({
 }) => {
     return (
         <View style={[styles.container, border && { borderBottomWidth: 0.5, borderBottomColor: blackColor(.1) }]}>
-            <Image source={CUSTOMIZE.nativeToken} style={styles.img} />
+            <Image source={CUSTOMIZE.token_icon} style={styles.img} />
             <View style={styles.content}>
                 <Text style={styles.label}>{future ? get(data, 'value.token_name', '') : get(data, 'key', '')}</Text>
                 <Text style={styles.amount}>{helpers.formatAmount(future ? get(data, 'value.total_value', '') : get(data, 'value', ''))}</Text>

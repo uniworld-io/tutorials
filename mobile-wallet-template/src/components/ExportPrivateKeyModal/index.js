@@ -85,7 +85,7 @@ export const ExportPrivateKeyModal = ({
                 {!privateKey ?
                     <View>
                         <Text style={styles.txt}>
-                            Type your {CONSTANTS.CURRENCY} wallet password
+                            Type your {CUSTOMIZE.token_name} wallet password
                         </Text>
                         <TextInput
                             style={styles.input}

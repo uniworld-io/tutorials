@@ -10,15 +10,10 @@ import {AppButton} from '../../components/AppButton';
 import {blackColor} from '../../utils/colorHelper';
 import {get} from 'lodash';
 import {helpers, SCREEN_WIDTH} from '../../utils/helpers';
-import {requestLogin} from '../../redux/actions/loginActions';
 import {
   encryptedPrivateKey,
-  fetchWalletInfo,
 } from '../../redux/actions/walletAction';
 import {decrypt, encrypt} from '../../utils/encrypt';
-import validateLogin from '../../redux/services/loginUser';
-import {walletUtils} from '../../utils/walletHelpers';
-import {checkImportantWallet, Constants} from '../../config/constants';
 import {Loading} from '../../components/Loading';
 
 const CreateWallet = (props) => {

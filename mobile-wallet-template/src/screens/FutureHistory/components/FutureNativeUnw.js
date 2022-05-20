@@ -22,7 +22,7 @@ import { ListFooterComponent } from '../../../components/LoadingFooter';
 import { REQUEST_GET_ACCOUNT_RESOURCE } from '../../../redux/actions/types';
 import { ConfirmPwdModal } from '../../../components/ConfirmPwdModal';
 import { decrypt } from '../../../utils/encrypt';
-import { CONSTANTS } from '../../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../../config/customize';
 
 let stopFetchMore = true;
 
@@ -168,7 +168,7 @@ const FutureNativeUnw = ({ keyExtract, ...props }) => {
         <View style={{ flex: 1, padding: 15 }}>
             <View style={styles.header}>
                 <AppButton
-                    text={`Claim (${helpers.formatNumber(available)} ${CONSTANTS.CURRENCY})`}
+                    text={`Claim (${helpers.formatNumber(available)} ${CUSTOMIZE.token_name})`}
                     style={styles.claimBtn}
                     textStyle={styles.claimTxt}
                     handleAction={() => setVisible(true)}

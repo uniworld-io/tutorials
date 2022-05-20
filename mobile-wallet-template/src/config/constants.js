@@ -1,5 +1,5 @@
 import ApiConfig from './api-config';
-import { CONSTANTS } from './customize';
+import { CUSTOMIZE } from './customize';
 
 export const Constants = {
   ACCESS_TOKEN: 'ACCESS_TOKEN',
@@ -39,8 +39,8 @@ export const MESSAGES = {
 
   WITHDRAW_TOKEN_FUTURE_TRANSACTION_SUCCESS:
     'Withdraw Token transaction future success',
-  LOCK_UNW_SUCCESS: `Lock ${CONSTANTS.CURRENCY} success! You can vote now!`,
-  LOCK_UNW_FAILS: `Lock ${CONSTANTS.CURRENCY} fails! Please try again`,
+  LOCK_UNW_SUCCESS: `Lock ${CUSTOMIZE.token_name} success! You can vote now!`,
+  LOCK_UNW_FAILS: `Lock ${CUSTOMIZE.token_name} fails! Please try again`,
   BALANCE_NOT_ENOUGH: 'Your balance not available!',
 
   VOTE_WITNESS_SUCCESS: 'Vote witness success',
@@ -52,20 +52,20 @@ export const MESSAGES = {
   PWD_BLANK: 'Password blank!',
   INPUT_PASSWORD_COMPLEX:
     'Password has least 8 character, there is a lower-case letter, least 1 lowercase,  1 uppercase,  1 numeric or symbol character',
-  UNW_ADDRESS_INCORRECT: `${CONSTANTS.CURRENCY} address is incorrect!`,
+  UNW_ADDRESS_INCORRECT: `${CUSTOMIZE.token_name} address is incorrect!`,
   ADDRESS_NOT_VALID: ' Address is invalid!',
   PASSWORD_INCORRECT: 'Password wrong! Please try again!',
 
   SEND_UNW_SUCCESS: 'Your transaction is completed!',
   SEND_FAIL: 'Sorry, your transaction has been rejected!',
-  SEND_UNW_FAILS: `Sent ${CONSTANTS.CURRENCY} fails!`,
+  SEND_UNW_FAILS: `Sent ${CUSTOMIZE.token_name} fails!`,
   SEND_UNW_FAILS_PASSWORD:
-    `Sent ${CONSTANTS.CURRENCY} fails, please check your password confirm and try again!`,
+    `Sent ${CUSTOMIZE.token_name} fails, please check your password confirm and try again!`,
   SEND_OWNER_ADDRESS: 'Can not send to your address',
   BALANCE_NOT_ENOUGH: 'Balance is not enough! please try again!',
 
-  SEND_UNW_TOKEN_SUCCESS: `Sent ${CONSTANTS.CURRENCY} Token successfully`,
-  SEND_UNW_TOKEN_FAILS: `Sent ${CONSTANTS.CURRENCY} Token fails!`,
+  SEND_UNW_TOKEN_SUCCESS: `Sent ${CUSTOMIZE.token_name} Token successfully`,
+  SEND_UNW_TOKEN_FAILS: `Sent ${CUSTOMIZE.token_name} Token fails!`,
 
   PASSWORD_NOT_MATCH: 'Confirm password is not match!',
 
@@ -134,7 +134,7 @@ export const CONTRACT_TYPE_MAPPING = {
   ClearABIContract: 'Clear ABI',
   UpdateBrokerageContract: 'Update Witness Ratio',
   FutureTransferContract: 'Future Transfer ',
-  FutureWithdrawContract: `Withdraw Future ${CONSTANTS.CURRENCY}`,
+  FutureWithdrawContract: `Withdraw Future ${CUSTOMIZE.token_name}`,
   CreateTokenContract: 'Create Token ',
   ContributeTokenPoolFeeContract: 'Contribute Token Fee ',
   UpdateTokenParamsContract: 'Update Token ',
@@ -189,10 +189,10 @@ export const TOKEN_TOOLTIPS = {
   fee: 'The transaction fee for transferring a token regardless of token amount. Please note that the token transaction fee of transferring a token will be transaction fee and extra fee.  For example, if the fee is set to 2, the extra fee rate is set to 1%. The total transaction fee when transfering 100 token X will be 2 + 1% * 100 = 3 token X, total token subtracted  from source account will be 103 token X.',
   lot: 'The minimum token amount to transfer in each transaction. It should be integer number with the range from 1 to 2^63 - 1',
   feePool:
-    `The initial fee pool for token. Minimum value is 10 ${CONSTANTS.CURRENCY} (enough for 37453 transactions at the moment) and everyone can alway contribute a token fee pool later.`,
+    `The initial fee pool for token. Minimum value is 10 ${CUSTOMIZE.token_name} (enough for 37453 transactions at the moment) and everyone can alway contribute a token fee pool later.`,
   description: 'The brief description of the token',
   conversionRate:
-    `The rate when users exchange ${CONSTANTS.CURRENCY} to token. This conversion rate is calculated by the number of token and number of ${CONSTANTS.CURRENCY} in Ginza unit below. Please note that 1 ${CONSTANTS.CURRENCY} = 10^6 Ginza.`,
+    `The rate when users exchange ${CUSTOMIZE.token_name} to token. This conversion rate is calculated by the number of token and number of ${CUSTOMIZE.token_name} in Ginza unit below. Please note that 1 ${CUSTOMIZE.token_name} = 10^6 Ginza.`,
   create_account_fee:
     'Fee measured by token if creating new account (0 < fee < 10,000,000)',
 };

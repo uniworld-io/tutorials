@@ -95,7 +95,7 @@ const AssetItem = ({
             onPress={onPress}
             style={styles.currencyContainer}>
             <Image
-                source={get(data, 'key', '') === CONSTANTS.CURRENCY ? CUSTOMIZE.nativeToken : images.unwCashGr}
+                source={get(data, 'key', '') === CUSTOMIZE.token_name ? CUSTOMIZE.token_icon : images.unwCashGr}
                 style={{ width: 28, height: 28, borderRadius: 6 }}
             />
             <View
@@ -109,7 +109,7 @@ const AssetItem = ({
                 <BoldText style={{ fontSize: 14 }}>{get(data, 'value.token_name', '')}</BoldText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
                     <SemiBoldText style={{ marginHorizontal: 4, fontSize: 16 }}>
-                        {data?.key === CONSTANTS.CURRENCY ? helpers.formatAmount(helpers.formatUnw(get(data, 'value', 0)), 6) : get(data, 'value.total_value', 0)}
+                        {data?.key === CUSTOMIZE.token_name ? helpers.formatAmount(helpers.formatUnw(get(data, 'value', 0)), 6) : get(data, 'value.total_value', 0)}
                     </SemiBoldText>
                 </View>
             </View>

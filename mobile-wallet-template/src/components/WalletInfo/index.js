@@ -3,10 +3,10 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'native-base';
 import {blackColor} from '../../utils/colorHelper';
 import { helpers } from '../../utils/helpers';
-import { CONSTANTS } from '../../config/customize';
+import { CONSTANTS, CUSTOMIZE } from '../../config/customize';
 
 export const WalletInfo = ({
-  label = `Your ${CONSTANTS.CURRENCY}'s Wallet Address`,
+  label = `Your ${CUSTOMIZE.token_name}'s Wallet Address`,
   content = '',
   numberOfLines = 1,
   style = {},

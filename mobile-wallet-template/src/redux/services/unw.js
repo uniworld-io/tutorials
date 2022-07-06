@@ -1,8 +1,10 @@
 import Unichain from '@uniworld/unichain-js';
 import axios from 'axios';
-import { get } from 'lodash';
+import { find, get } from 'lodash';
 import ApiConfig from '../../config/api-config';
 import { ACTION_TOKEN_BY_NATIVE_UNW, ACTION_TOKEN_MAPPING } from '../../config/constants';
+import { walletUtils } from '../../utils/walletHelpers';
+import * as urc20Api from '../../redux/services/urc20';
 import { apiClient } from './client';
 
 //initiate unichainjs
@@ -268,6 +270,7 @@ export const getAccountResource = async (address) => {
     const results = await apiClient.post(`/wallet/getaccount`, {
       address: unichain.address.toHex(address)
     });
+    console.log('ssssss', results);
     //list token 
     let listTokens = []
     if (results["asset"] && results["asset"].length > 0) {
@@ -296,6 +299,28 @@ export const getAccountResource = async (address) => {
       });
     }
 
+    // urc20
+    let urc20 = [];
+    const tempUrc20 = results['urc20'];
+    if (tempUrc20 && tempUrc20.length > 0) {
+      const requests = []
+      tempUrc20.forEach((item) => {
+        requests.push(urc20Api.find({ address: walletUtils.unwAddressToHex(item.key) }))
+      })
+      const tokens = await Promise.all(requests)
+      const temp = tokens.map((item) => {
+        const tempValue = find(tempUrc20, (urc20Item => urc20Item.key === walletUtils.hexToUnwAddress(get(item, 'contracts[0].address', ''))));
+        console.log('tempValue', tempValue);
+        return ({
+          ...item?.contracts[0],
+          value: tempValue?.value,
+          key: item?.contracts[0]?.symbol,
+          type: 'urc20'
+        })
+      })
+      urc20 = temp;
+    }
+
     return {
       status: true,
       balance: get(results, 'balance', 0), // locked, future, current balance
@@ -303,10 +328,12 @@ export const getAccountResource = async (address) => {
       lock: lockedTotal,
       vote_count: votes,
       token: results.token,
+      urc20,
       future_supply: results.future_supply,
       token_future: results.token_future ? results.token_future : []
     }
   } catch (error) {
+    console.log('errr', error);
     return {
       status: false,
       balance: 0,
@@ -314,6 +341,7 @@ export const getAccountResource = async (address) => {
       lock: 0,
       vote_count: 0,
       token: [],
+      urc20: [],
       future_supply: [],
       lock: 0,
       token_future: []

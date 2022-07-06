@@ -60,7 +60,7 @@ export const ActionPanel = ({
           <RegularText style={styles.txtBtn}>Receive</RegularText>
         </Pressable>
       </View>
-      {get(walletResource, 'token_future', []).length > 0 &&
+      {get(walletResource, 'token_future', []).filter(item => item.key === CUSTOMIZE.token_name).length > 0 &&
         <View
           style={styles.tokenWrapper}>
           <View style={{ flex: 1 }}>
@@ -76,7 +76,7 @@ export const ActionPanel = ({
                 </SemiBoldText>
               </Pressable>
             </View>
-            {get(walletResource, 'token_future', []).map((item, idx) => {
+            {get(walletResource, 'token_future', []).filter(item => item.key === CUSTOMIZE.token_name).map((item, idx) => {
               return <TokenItem
                 key={idx + 'token_future'}
                 data={item}

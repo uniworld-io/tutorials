@@ -72,7 +72,8 @@ export const WalletCard = ({
           <Text>
             <BoldText
               style={{ color: COLORS.white, fontSize: helpers.isIpX ? 30 : 26 }}>
-              {helpers.formatAmount((get(resource, 'value', 0) + get(futureResource, 'value', 0)), 3)} {' '}
+              {/* {helpers.formatAmount((get(resource, 'value', 0) + get(futureResource, 'value', 0)), 3)} {' '} */}
+              {helpers.formatAmount(helpers.formatNumberWithDecimals(get(resource, 'value', 0), get(resource, 'decimals', 0)))}
             </BoldText>
             <SemiBoldText style={{ color: COLORS.white }}>{CUSTOMIZE.token_name}</SemiBoldText>
           </Text>

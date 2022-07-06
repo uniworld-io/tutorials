@@ -238,7 +238,7 @@ const Wallet = (props) => {
               <View>
                 <WalletCard
                   unwAddress={unwAddress}
-                  resource={find(walletResource?.token, asset => asset.key === CUSTOMIZE.token_name)}
+                  resource={find(walletResource?.urc20, asset => asset.key === CUSTOMIZE.token_name)}
                   futureResource={find(walletResource?.token_future, asset => asset.key === CUSTOMIZE.token_name)}
                 />
                 <ActionPanel

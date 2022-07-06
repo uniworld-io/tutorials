@@ -30,6 +30,7 @@ import {
   actSendNativeUNW,
   actSendNativeUNWFuture,
   actSendUNWToken,
+  actSendUrc20Token,
 } from '../../redux/actions/walletAction';
 import { ConfirmPwdModal } from '../../components/ConfirmPwdModal';
 import moment from 'moment';
@@ -64,7 +65,7 @@ const SendCoin = props => {
   );
   const { txVisible } = useSelector(state => state.modalReducer);
 
-  const [selectedCurrency, setSelectedCurrency] = useState(find(walletResource?.token, asset => asset.key === CUSTOMIZE.token_name),);
+  const [selectedCurrency, setSelectedCurrency] = useState(find(walletResource?.urc20, asset => asset.key === CUSTOMIZE.token_name),);
   const [amount, setAmount] = useState('');
   const [receiver, setReceiver] = useState('');
   const [errorAd, setErrorAd] = useState(null);
@@ -78,7 +79,7 @@ const SendCoin = props => {
   );
   const [tokenShown, setTokenShown] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [fee, setFee] = useState(0);
+  // const [fee, setFee] = useState(0);
 
   const [clue, setClue] = useState(false);
   const [count, setCount] = useState(false);
@@ -86,7 +87,6 @@ const SendCoin = props => {
   useEffect(() => {
     if (!txVisible && count) {
       setTimeout(() => {
-        console.log('11111');
         checkExistingAccount(receiver);
       }, 401);
     }
@@ -98,10 +98,7 @@ const SendCoin = props => {
   }
 
   useEffect(() => {
-    const tempData = [
-      { key: 'unw', value: get(walletResource, 'balance', 0) },
-      ...get(walletResource, 'token', []),
-    ];
+    const tempData = get(walletResource, 'urc20', []);
     const currentSelected = find(tempData, item => {
       return item.key === selectedCurrency?.key;
     });
@@ -128,30 +125,6 @@ const SendCoin = props => {
     }
   }, [amount, walletResource, receiver]);
 
-  useEffect(() => {
-    if (selectedCurrency && amount) {
-      apiClient
-        .post('wallet/gettokenpool', {
-          token_name: selectedCurrency?.key,
-          page_size: 10,
-          page_index: 0,
-        })
-        .then(res => {
-          const firstToken = get(res, 'tokens[0]', null);
-          // console.log(firstToken);
-          if (firstToken) {
-            setFee(
-              get(firstToken, 'fee', 0) +
-              parseFloat(amount) *
-              parseFloat(
-                (get(firstToken, 'extra_fee_rate', 0) * 1.0) / 100,
-              ),
-            );
-          }
-        });
-    }
-  }, [selectedCurrency, amount]);
-
   const requestSendCoin = async () => {
     await setErrorAd(null);
     if (!isUnwAddress(receiver)) {
@@ -165,6 +138,18 @@ const SendCoin = props => {
     }
   };
 
+  const getFee = (type, fee, decimals) => {
+    switch (type) {
+      case 'native':
+        return 0.000267
+      case 'urc20':
+      case 'urc30':
+        return fee / (10 ** decimals)
+      default:
+        return 0
+    }
+  }
+
   const handleSendCoin = async () => {
     dispatch({ type: PWD_MODAL_LOADING_ENABLE });
     await setError(null);
@@ -172,52 +157,16 @@ const SendCoin = props => {
       const privateKey = await decrypt(encryptedPrivateKey, pwd);
       setCount(true);
       if (privateKey) {
-        if (future) {
-          if (selectedCurrency?.key === 'UNW') {
-            dispatch(
-              actSendNativeUNWFuture({
-                owner_address: unwAddress,
-                to_address: receiver,
-                amount: amount,
-                expire_time: new Date(expiredTime).getTime(),
-                privateKey: privateKey,
-              }),
-            );
-          } else {
-            dispatch(
-              actRequestTransferToken({
-                owner_address: unwAddress,
-                to_address: receiver,
-                token_name: selectedCurrency?.key,
-                amount: parseInt(amount),
-                available_time: new Date(expiredTime).getTime(),
-                privateKey: privateKey,
-              }),
-            );
-          }
-        } else {
-          if (selectedCurrency?.key === 'UNW') {
-            dispatch(
-              actSendNativeUNW({
-                from_address: unwAddress,
-                to_address: receiver,
-                amount: amount,
-                private_key: privateKey,
-                description: '',
-              }),
-            );
-          } else {
-            dispatch(
-              actSendUNWToken({
-                owner_address: unwAddress,
-                to_address: receiver,
-                token_name: selectedCurrency?.key,
-                amount: parseInt(amount),
-                privateKey: privateKey,
-              }),
-            );
-          }
-        }
+        dispatch(
+          actSendUrc20Token({
+            address: selectedCurrency?.address,
+            owner_address: unwAddress,
+            to: receiver,
+            amount: (amount * 10 ** get(selectedCurrency, 'decimals', 0)).toString(),
+            available_time: future ? new Date(expiredTime).getTime() : undefined,
+            privateKey,
+          }),
+        );
       } else {
         setError(MESSAGES.WRONG_PWD);
         dispatch({ type: PWD_MODAL_LOADING_DISABLE });
@@ -283,7 +232,8 @@ const SendCoin = props => {
                   marginLeft: 10,
                 }}>
                 <SemiBoldText style={{ marginHorizontal: 4, fontSize: 18 }}>
-                  {selectedCurrency?.value}
+                  {/* {selectedCurrency?.value} */}
+                  {helpers.formatAmount(helpers.formatNumberWithDecimals(get(selectedCurrency, 'value', 0), get(selectedCurrency, 'decimals', 0)))}
                 </SemiBoldText>
               </View>
             </View>
@@ -356,19 +306,33 @@ const SendCoin = props => {
               <RegularText style={styles.unwTxt}>MAX</RegularText>
             </Pressable>
           </View>
-          <ThinText
-            style={{
-              fontSize: 13,
-              color: '#525B6B',
-              marginTop: 8,
-            }}>
-            <Text style={{ color: '#9D9E9F' }}>Transaction Fee: </Text>
-            <Text style={{ fontWeight: '500' }}>
-              {' '}
-              {selectedCurrency?.key === CUSTOMIZE.token_name ? '0,000267' : fee}{' '}
-              {selectedCurrency?.key}
-            </Text>
-          </ThinText>
+          <View style={{ marginTop: 8, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row' }}>
+            <ThinText
+              style={{
+                fontSize: 13,
+                color: '#525B6B',
+              }}>
+              <Text style={{ color: '#9D9E9F' }}>Min: </Text>
+              <Text style={{ fontWeight: '500' }}>
+                {' '}
+                {selectedCurrency?.key === 'UNW' ? '1' : get(selectedCurrency, 'lot', 1)}{' '}
+                {selectedCurrency?.key}
+              </Text>
+            </ThinText>
+            <ThinText
+              style={{
+                fontSize: 13,
+                color: '#525B6B',
+              }}>
+              <Text style={{ color: '#9D9E9F' }}>Fee: </Text>
+              <Text style={{ fontWeight: '500' }}>
+                {' '}
+                {/* {selectedCurrency?.key === 'UNW' ? '0,000267' : fee}{' '} */}
+                {getFee('urc20', get(selectedCurrency, 'fee', 0), get(selectedCurrency, 'decimals', 0))}{' '}
+                {selectedCurrency?.key}
+              </Text>
+            </ThinText>
+          </View>
           {/* section future */}
           <View
             style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>

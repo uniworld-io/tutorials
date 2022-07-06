@@ -332,7 +332,16 @@ const md5 = async (file, cb) => {
   cb(ret);
 };
 
+
+const formatNumberWithDecimals = (num, decimals) => {
+  if (!num) {
+    return 0;
+  }
+  return ExactMath.add(num / 10 ** decimals, 0);
+};
+
 export const helpers = {
+  formatNumberWithDecimals,
   validateExistingAdd,
   truncateAbbr,
   capitalizeFirstLetter,

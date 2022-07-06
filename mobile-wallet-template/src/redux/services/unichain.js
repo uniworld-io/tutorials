@@ -3,8 +3,8 @@ import Unichain from '@uniworld/unichain-js';
 import { NETWORK_CONFIG } from '../../config/customize';
 
 const unichain = new Unichain({
-  fullHost: NETWORK_CONFIG.UNICHAIN_NETWORK,
-  solidityNode: NETWORK_CONFIG.RELAY_NETWORK,
+  fullHost: NETWORK_CONFIG.BASE_URL,
+  solidityNode: NETWORK_CONFIG.RELAY_NODE,
 });
 
 export const request = async (endpoint, method, data) => {

@@ -270,7 +270,7 @@ export const getAccountResource = async (address) => {
     const results = await apiClient.post(`/wallet/getaccount`, {
       address: unichain.address.toHex(address)
     });
-    console.log('ssssss', results);
+    // console.log('ssssss', results);
     //list token 
     let listTokens = []
     if (results["asset"] && results["asset"].length > 0) {
@@ -310,7 +310,7 @@ export const getAccountResource = async (address) => {
       const tokens = await Promise.all(requests)
       const temp = tokens.map((item) => {
         const tempValue = find(tempUrc20, (urc20Item => urc20Item.key === walletUtils.hexToUnwAddress(get(item, 'contracts[0].address', ''))));
-        console.log('tempValue', tempValue);
+        // console.log('tempValue', tempValue);
         return ({
           ...item?.contracts[0],
           value: tempValue?.value,

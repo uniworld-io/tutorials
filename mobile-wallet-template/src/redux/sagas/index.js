@@ -4,7 +4,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import * as types from '../actions/types';
 import { autoLoginAsync } from './loginSaga';
-import { actSendNativeUnw, handleGetResourceAccount, handleTransferToken, handleSendUnwFutureAction, handleSubmitCreateToken } from './walletSaga';
+import { actSendNativeUnw, handleGetResourceAccount, handleTransferUrc20Token, handleTransferToken, handleSendUnwFutureAction, handleSubmitCreateToken } from './walletSaga';
 
 export default function* watch() {
   yield all([takeLatest(types.AUTO_LOGIN_REQUEST, autoLoginAsync)]);
@@ -14,4 +14,5 @@ export default function* watch() {
   yield all([takeLatest(types.REQUEST_SUBMIT_TRANSFER_TOKEN, handleTransferToken)]);
   yield all([takeLatest(types.REQUEST_SEND_FUTURE, handleSendUnwFutureAction)]);
   yield all([takeLatest(types.REQUEST_SUBMIT_ISSUE_TOKEN, handleSubmitCreateToken)]);
+  yield all([takeLatest(types.REQUEST_TRANSFER_URC20, handleTransferUrc20Token)]);
 }

@@ -2,6 +2,8 @@ import { get } from 'lodash';
 import { put, call } from 'redux-saga/effects';
 import { MESSAGES } from '../../config/constants';
 import { helpers } from '../../utils/helpers';
+import { walletUtils } from '../../utils/walletHelpers';
+import * as urc20Api from '../services/urc20';
 import { GET_ACCOUNT_RESOURCE_SUCCESS, PWD_MODAL_LOADING_DISABLE, REQUEST_GET_ACCOUNT_RESOURCE, SEND_UNW_TOKEN_FAIL, TX_STATUS_MODAL_SHOW, TX_STATUS_MODAL_SHOW_ERROR } from '../actions/types';
 import { futureTransfer, getAccountResource, issueToken, isUnwAddress, sendTokenUNW, sendUNW, transferToken } from '../services/unw';
 
@@ -211,3 +213,47 @@ export function* handleSendUnwFutureAction(action) {
     }
 }
 
+// Send Urc20 Token
+export function* handleTransferUrc20Token(action) {
+    const { address, owner_address, to, amount, available_time, privateKey } = action.data;
+    try {
+        const res = yield urc20Api.transfer({
+            address,
+            owner_address: walletUtils.unwAddressToHex(owner_address),
+            to: walletUtils.unwAddressToHex(to),
+            amount,
+            available_time,
+        }, privateKey)
+        yield put({ type: PWD_MODAL_LOADING_DISABLE });
+
+        console.log('res', res);
+
+        if (res.result) {
+            const { transaction } = res
+            const { txID } = transaction
+
+            yield put({
+                type: TX_STATUS_MODAL_SHOW,
+                data: txID
+            });
+            yield put({
+                type: REQUEST_GET_ACCOUNT_RESOURCE,
+                data: owner_address
+            });
+
+        } else {
+            yield put({
+                type: TX_STATUS_MODAL_SHOW_ERROR,
+                data: helpers.handleError(get(res, 'message.Error', ''))
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+        yield put({ type: PWD_MODAL_LOADING_DISABLE });
+        yield put({
+            type: TX_STATUS_MODAL_SHOW_ERROR,
+            data: MESSAGES.NORMAL_ERROR
+        })
+    }
+}

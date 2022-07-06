@@ -112,3 +112,11 @@ export function actSendUNWToken(data) {
       data
   }
 }
+
+export const actSendUrc20Token = (data) => {
+  return {
+      type: types.REQUEST_TRANSFER_URC20,
+      data
+  }
+}
+

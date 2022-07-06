@@ -40,4 +40,23 @@ const ApiConfig = {
   GET_S3_SIGNED_URL: '/v1/s3/signed-url',
 };
 
+// URC20
+export const CREATE_TOKEN = `${ApiConfig.BASE_URL}/wallet/urc20createcontract`
+export const FETCH_TOKEN = `${ApiConfig.BASE_URL}/wallet/urc20contractlist`
+export const URC20_TRANSFER_FROM = `${ApiConfig.BASE_URL}/wallet/urc20transferfrom`
+export const URC20_TRANSFER = `${ApiConfig.BASE_URL}/wallet/urc20transfer`
+export const URC20_APPROVE = `${ApiConfig.BASE_URL}/wallet/urc20approve`
+export const URC20_MINT = `${ApiConfig.BASE_URL}/wallet/urc20mint`
+export const URC20_BURN = `${ApiConfig.BASE_URL}/wallet/urc20burn`
+export const URC20_TRANSFER_OWNER = `${ApiConfig.BASE_URL}/wallet/urc20transferowner`
+export const URC20_EXCHANGE = `${ApiConfig.BASE_URL}/wallet/urc20exchange`
+export const URC20_CONTRIBUTE_POOL_FEE = `${ApiConfig.BASE_URL}/wallet/urc20contributepoolfee`
+export const URC20_UPDATE_PARAMS = `${ApiConfig.BASE_URL}/wallet/urc20updateparams`
+export const URC20_WITHDRAW_FUTURE = `${ApiConfig.BASE_URL}/wallet/urc20withdrawfuture`
+export const URC20_FUTURE_GET = `${ApiConfig.BASE_URL}/wallet/urc20futureget`
+
+// URC30 (old token)
+export const URC30_FETCH = `${ApiConfig.BASE_URL}/wallet/gettokenpool`
+export const URC30_SEND = `${ApiConfig.BASE_URL}/wallet/transfertoken`
+
 export default ApiConfig;

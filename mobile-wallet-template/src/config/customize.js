@@ -7,9 +7,6 @@ export const CONSTANTS = {
 
 export const NETWORK_CONFIG = {
     
-    UNICHAIN_NETWORK: 'https://test-seed.unichain.world',
-    RELAY_NETWORK: 'https://test-seed-relay.unichain.world',
-    
     BASE_EXPLORER_URL: 'https://uniscan.world/api',
     UNI_SCAN_URL: 'https://uniscan.world',
     BASE_URL: 'https://node.unichain.world',
